@@ -1,0 +1,6 @@
+{
+  "name": "SurakshaUPI - Class 9 UPI Fraud Awareness Chatbot",
+  "description": "An interactive, student-friendly UPI cyber safety chatbot designed for Class 9 school project demonstration. Analyzes suspicious calls, QR codes, messages, and payment requests to provide instant scam alerts and safety rules.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

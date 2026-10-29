@@ -1,0 +1,3793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SurakshaUPI - UPI Fraud Awareness & Prevention Chatbot</title>
+  <meta name="description" content="SurakshaUPI Cyber Safety Chatbot. Analyzes suspicious calls, QR codes, messages, and UPI situations with Turtle UI visual simulation and Helpline 1930 guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * SurakshaUPI: Pure CSS Design System
+     * Self-contained, responsive, zero framework bloat
+     */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f1f5f9;
+      color: #1e293b;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Emergency Helpline Banner */
+    .helpline-bar {
+      background: linear-gradient(90deg, #059669, #0d9488, #4338ca);
+      color: #ffffff;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .helpline-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .helpline-badge {
+      background-color: #facc15;
+      color: #0f172a;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .helpline-num {
+      color: #fef08a;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .helpline-report-btn {
+      background-color: #dc2626;
+      color: #ffffff;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .helpline-report-btn:hover {
+      background-color: #b91c1c;
+      transform: scale(1.02);
+    }
+
+    /* Main Navigation Header */
+    .main-header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #4f46e5, #059669);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #ffffff;
+      box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.25);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title span {
+      color: #4f46e5;
+    }
+
+    .class-tag {
+      background-color: #e0e7ff;
+      color: #4338ca;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav {
+      color: #334155;
+      background-color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-nav:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .btn-nav.active-tab {
+      background-color: #4f46e5;
+      border-color: #4f46e5;
+      color: #ffffff;
+    }
+
+    .btn-nav.python-highlight {
+      background-color: #fef3c7;
+      border-color: #fcd34d;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    .btn-nav.python-highlight:hover {
+      background-color: #fde68a;
+    }
+
+    /* Page Layout */
+    .page-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+    }
+
+    /* Tab switcher */
+    .view-switcher-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 8px 12px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tabs-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      background-color: #f8fafc;
+      color: #475569;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+    }
+
+    .tab-btn.turtle-active {
+      background-color: #059669;
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+    }
+
+    .tab-desc {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    /* Active Chatbot Main Card */
+    .chatbot-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 600px;
+      height: 680px;
+    }
+
+    /* Scenario Quick Chips Header */
+    .scenarios-chips-bar {
+      background-color: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 16px;
+    }
+
+    .chips-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #475569;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chips-list {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    .chip-btn {
+      background-color: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .chip-btn:hover {
+      background-color: #e0e7ff;
+      border-color: #6366f1;
+      color: #312e81;
+      transform: translateY(-1px);
+    }
+
+    /* Chat Transcript Scroll Area */
+    .chat-transcript {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background-color: #fafbfc;
+      scroll-behavior: smooth;
+    }
+
+    .bot-message {
+      align-self: flex-start;
+      max-width: 88%;
+      flex-shrink: 0;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 16px 20px;
+      border-radius: 16px;
+      border-top-left-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      font-size: 14px;
+      color: #1e293b;
+      line-height: 1.55;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      max-width: 80%;
+      flex-shrink: 0;
+      background-color: #4f46e5;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 16px;
+      border-top-right-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+    }
+
+    .msg-author {
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      opacity: 0.85;
+      letter-spacing: 0.3px;
+    }
+
+    /* Question Option Card */
+    .question-card {
+      border-left: 4px solid #4f46e5;
+      background-color: #f8fafc;
+      width: 100%;
+      max-width: 88%;
+    }
+
+    .question-heading {
+      font-size: 14px;
+      font-weight: 800;
+      color: #1e1b4b;
+      margin-bottom: 12px;
+    }
+
+    .question-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-option {
+      text-align: left;
+      background-color: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      color: #1e1b4b;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-option:hover:not(:disabled) {
+      background-color: #4f46e5;
+      color: #ffffff;
+      border-color: #4f46e5;
+      transform: translateX(4px);
+    }
+
+    .btn-option:disabled {
+      opacity: 0.65;
+      cursor: default;
+    }
+
+    .btn-option.selected-option {
+      background-color: #312e81;
+      color: #ffffff;
+      border-color: #312e81;
+      font-weight: 800;
+    }
+
+    /* Diagnosis Result Card */
+    .diagnosis-card {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-top: 10px;
+    }
+
+    .danger-card {
+      background-color: #fef2f2;
+      border-color: #f87171;
+    }
+
+    .warning-card {
+      background-color: #fffbeb;
+      border-color: #fbbf24;
+    }
+
+    .diagnosis-header {
+      padding: 16px 20px;
+      background: linear-gradient(90deg, #dc2626, #991b1b);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .warning-card .diagnosis-header {
+      background: linear-gradient(90deg, #d97706, #b45309);
+    }
+
+    .diag-title {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .diag-cat {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .diag-badge {
+      background-color: #ffffff;
+      color: #991b1b;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .warning-card .diag-badge {
+      color: #b45309;
+    }
+
+    .diagnosis-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Threat Meter Bar */
+    .meter-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+
+    .meter-bar-bg {
+      width: 100%;
+      height: 12px;
+      background-color: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .meter-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b, #dc2626);
+      border-radius: 10px;
+      transition: width 0.8s ease-in-out;
+    }
+
+    .diag-summary {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      color: #334155;
+    }
+
+    .diag-flags {
+      background-color: #ffffff;
+      border: 1px solid #fee2e2;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #991b1b;
+    }
+
+    .diag-flags ul, .diag-actions ol {
+      margin-left: 22px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .diag-actions {
+      background-color: #ffffff;
+      border: 1px solid #d1fae5;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #065f46;
+    }
+
+    .diag-golden-rule {
+      background: linear-gradient(90deg, #1e1b4b, #312e81);
+      color: #ffffff;
+      padding: 14px 18px;
+      border-radius: 12px;
+    }
+
+    .rule-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: #facc15;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .rule-text {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 4px;
+    }
+
+    .diag-btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn-report-diag {
+      background-color: #dc2626;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-report-diag:hover {
+      background-color: #b91c1c;
+    }
+
+    .btn-read-diag {
+      background-color: #4f46e5;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-read-diag:hover {
+      background-color: #4338ca;
+    }
+
+    .btn-turtle-diag {
+      background-color: #059669;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-turtle-diag:hover {
+      background-color: #047857;
+    }
+
+    .btn-reset-diag {
+      background-color: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Saved Chat History Banner & Drawer */
+    .history-banner {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .history-banner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .history-info-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .history-badge {
+      background: #e0e7ff;
+      color: #4338ca;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      display: inline-block;
+    }
+
+    .btn-history-toggle, .btn-history-clear {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-history-toggle:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+
+    .btn-history-clear {
+      color: #dc2626;
+      border-color: #fecaca;
+    }
+
+    .btn-history-clear:hover {
+      background: #fef2f2;
+      border-color: #f87171;
+    }
+
+    .history-drawer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    .history-item-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .history-item-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    }
+
+    .history-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .history-item-threat {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .history-item-threat.critical {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .history-item-threat.high {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .history-item-threat.medium {
+      background: #fef9c3;
+      color: #854d0e;
+    }
+
+    .history-item-time {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .history-item-prompt {
+      font-size: 13px;
+      color: #0f172a;
+      font-weight: 600;
+      margin-bottom: 6px;
+      background: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border-left: 3px solid #6366f1;
+    }
+
+    .history-item-details {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    .history-item-rule {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .history-item-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .btn-history-retest {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-history-retest:hover {
+      background: #4338ca;
+    }
+
+    /* Typing Indicator */
+    .typing-box {
+      display: none;
+      font-size: 13px;
+      color: #64748b;
+      font-style: italic;
+      padding: 6px 20px;
+    }
+
+    /* Chat Input Bar */
+    .chat-input-bar {
+      background-color: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 14px 20px;
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background-color: #f8fafc;
+      transition: border 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: #4f46e5;
+      background-color: #ffffff;
+    }
+
+    .btn-send {
+      background-color: #4f46e5;
+      color: #ffffff;
+      border: none;
+      padding: 0 26px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-send:hover {
+      background-color: #4338ca;
+    }
+
+    /* =========================================================
+       Python Turtle Studio Canvas & Simulator Section
+       ========================================================= */
+    .turtle-studio-card {
+      display: none; /* toggled via tab buttons */
+      background-color: #0f172a;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .turtle-header-bar {
+      background: linear-gradient(90deg, #1e293b, #0f172a);
+      border-bottom: 1px solid #334155;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .turtle-title-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .turtle-icon-badge {
+      font-size: 24px;
+    }
+
+    .turtle-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .turtle-subtitle {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .turtle-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-turtle-control {
+      background-color: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-turtle-control:hover {
+      background-color: #334155;
+      border-color: #64748b;
+    }
+
+    .btn-turtle-control.btn-turtle-run {
+      background-color: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+    }
+
+    .btn-turtle-control.btn-turtle-run:hover {
+      background-color: #059669;
+    }
+
+    .turtle-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-height: 480px;
+    }
+
+    @media (max-width: 900px) {
+      .turtle-body-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .turtle-canvas-wrap {
+      background-color: #0b1120;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+    }
+
+    #turtle-canvas {
+      background-color: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+      max-width: 100%;
+      height: auto;
+    }
+
+    .turtle-sidebar {
+      background-color: #1e293b;
+      border-left: 1px solid #334155;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+      max-height: 520px;
+    }
+
+    .turtle-sidebar-heading {
+      font-size: 13px;
+      font-weight: 800;
+      color: #f8fafc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .turtle-scenario-btn {
+      text-align: left;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .turtle-scenario-btn:hover {
+      background-color: #312e81;
+      border-color: #6366f1;
+      color: #ffffff;
+    }
+
+    .turtle-code-preview {
+      font-family: 'JetBrains Mono', Courier, monospace;
+      font-size: 11px;
+      background-color: #090d16;
+      border: 1px solid #1e293b;
+      padding: 10px;
+      border-radius: 8px;
+      color: #38bdf8;
+      max-height: 180px;
+      overflow-y: auto;
+      white-space: pre;
+    }
+
+    /* 6 Safety Rules Section */
+    .section-card {
+      background-color: #ffffff;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+
+    .card-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      background-color: #ffffff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .rule-num {
+      font-size: 10px;
+      font-weight: 900;
+      color: #6366f1;
+      text-transform: uppercase;
+    }
+
+    .card-item strong {
+      display: block;
+      font-size: 14px;
+      margin: 4px 0;
+      color: #0f172a;
+    }
+
+    .card-item p {
+      font-size: 12px;
+      color: #475569;
+    }
+
+    /* Modal Windows */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background-color: #ffffff;
+      border-radius: 20px;
+      max-width: 650px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      background: linear-gradient(90deg, #1e1b4b, #312e81);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header.danger-modal {
+      background: linear-gradient(90deg, #dc2626, #991b1b);
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .modal-footer {
+      padding: 12px 20px;
+      background-color: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .code-box {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      padding: 16px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', Courier, monospace;
+      font-size: 11px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    /* Tab button active state for Quiz */
+    .tab-btn.quiz-active {
+      background-color: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25);
+    }
+
+    /* =========================================================
+       Cyber Safety Quiz & Cyber Warrior Certificate Section
+       ========================================================= */
+    .quiz-card {
+      display: none; /* toggled via switchView('quiz') */
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .quiz-header-bar {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .quiz-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .quiz-icon-badge {
+      font-size: 28px;
+    }
+
+    .quiz-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .quiz-subtitle {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .quiz-status-pill {
+      background-color: rgba(14, 165, 233, 0.15);
+      border: 1px solid #0284c7;
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quiz-progress-track {
+      width: 100%;
+      height: 6px;
+      background-color: #e2e8f0;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #10b981);
+      transition: width 0.35s ease-in-out;
+    }
+
+    .quiz-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .quiz-scenario-card {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .scenario-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .scenario-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background-color: #e0e7ff;
+      color: #4338ca;
+    }
+
+    .scenario-points {
+      font-size: 12px;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .scenario-question-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+
+    .scenario-detail-box {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #475569;
+      background-color: #ffffff;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border-left: 3px solid #0284c7;
+      font-style: italic;
+    }
+
+    .quiz-options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-opt-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background-color: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .quiz-opt-btn:hover:not(:disabled) {
+      border-color: #0284c7;
+      background-color: #f0f9ff;
+      transform: translateY(-1px);
+    }
+
+    .quiz-opt-btn:disabled {
+      cursor: default;
+    }
+
+    .quiz-opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: #e2e8f0;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .quiz-opt-btn.correct {
+      border-color: #059669;
+      background-color: #ecfdf5;
+      color: #065f46;
+    }
+
+    .quiz-opt-btn.correct .quiz-opt-letter {
+      background-color: #059669;
+      color: #ffffff;
+    }
+
+    .quiz-opt-btn.incorrect {
+      border-color: #dc2626;
+      background-color: #fef2f2;
+      color: #991b1b;
+    }
+
+    .quiz-opt-btn.incorrect .quiz-opt-letter {
+      background-color: #dc2626;
+      color: #ffffff;
+    }
+
+    .quiz-feedback-box {
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .quiz-feedback-box.correct {
+      background-color: #ecfdf5;
+      border: 1.5px solid #a7f3d0;
+      color: #065f46;
+    }
+
+    .quiz-feedback-box.incorrect {
+      background-color: #fef2f2;
+      border: 1.5px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .feedback-title {
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feedback-explanation {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .feedback-rule {
+      font-size: 12px;
+      font-weight: 700;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .quiz-action-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .btn-quiz-next {
+      background-color: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-quiz-next:hover {
+      background-color: #0369a1;
+      transform: translateY(-1px);
+    }
+
+    /* Result & Certificate View */
+    .quiz-result-view {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .result-hero-box {
+      background: linear-gradient(135deg, #0f172a, #1e1b4b);
+      border-radius: 18px;
+      padding: 24px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .result-score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 var(--score-angle, 360deg), #334155 0deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+      flex-shrink: 0;
+    }
+
+    .score-inner {
+      width: 100%;
+      height: 100%;
+      background-color: #0f172a;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-big {
+      font-size: 24px;
+      font-weight: 900;
+      color: #facc15;
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 10px;
+      color: #94a3b8;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .result-text-area {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .result-verdict {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .result-desc {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Recipient Name Customizer Box */
+    .name-input-card {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .name-input-card label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .name-field {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .name-field:focus {
+      border-color: #0284c7;
+      background-color: #ffffff;
+    }
+
+    .btn-update-name {
+      background-color: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Certificate Graphic Container */
+    .certificate-wrap {
+      background: #f1f5f9;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .certificate-container {
+      min-width: 650px;
+      background: #ffffff;
+      border: 8px solid #0f172a;
+      position: relative;
+      padding: 36px 40px;
+      color: #0f172a;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      background-image: radial-gradient(#f8fafc 20%, transparent 20%), radial-gradient(#f1f5f9 20%, transparent 20%);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
+
+    .cert-inner-border {
+      border: 2px dashed #b45309;
+      padding: 24px;
+      position: relative;
+    }
+
+    .cert-corner-flower {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      font-size: 20px;
+      color: #d97706;
+      line-height: 1;
+    }
+
+    .cert-tl { top: -14px; left: -14px; }
+    .cert-tr { top: -14px; right: -14px; }
+    .cert-bl { bottom: -14px; left: -14px; }
+    .cert-br { bottom: -14px; right: -14px; }
+
+    .cert-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cert-org {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0284c7;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .cert-main-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .cert-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .cert-presentation-text {
+      text-align: center;
+      font-size: 13px;
+      color: #475569;
+      font-style: italic;
+      margin-top: 14px;
+    }
+
+    .cert-recipient-name {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      color: #1e3a8a;
+      margin: 12px 0;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #cbd5e1;
+      display: inline-block;
+      padding: 0 20px 4px;
+    }
+
+    .cert-name-center {
+      text-align: center;
+    }
+
+    .cert-body-text {
+      text-align: center;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    .cert-badge-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cert-badge-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cert-warrior-seal {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fef08a, #d97706);
+      border: 3px solid #b45309;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+      color: #78350f;
+    }
+
+    .seal-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .seal-text {
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .cert-meta-item {
+      font-size: 11px;
+      color: #475569;
+    }
+
+    .cert-meta-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .cert-meta-val {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .cert-actions-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .btn-cert-download {
+      background: linear-gradient(135deg, #059669, #0d9488);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-cert-download:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .btn-cert-print {
+      background-color: #0f172a;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cert-retake {
+      background-color: #ffffff;
+      color: #334155;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Emergency Helpline Banner -->
+  <div class="helpline-bar">
+    <div class="helpline-container">
+      <div>
+        <span class="helpline-badge">Helpline</span>
+        <span>Defrauded on UPI? Dial</span>
+        <span class="helpline-num">1930</span>
+        <span>(National Cyber Crime Reporting Portal)</span>
+      </div>
+      <div>
+        <button onclick="openReportModal()" class="helpline-report-btn">🚨 Emergency Report 1930</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">🛡️</div>
+        <div>
+          <div class="brand-title">
+            Suraksha<span>UPI</span>
+          </div>
+          <div class="brand-subtitle">
+            Real-Time UPI Cyber Safety & Fraud Detector
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button onclick="switchView('chat')" id="nav-btn-chat" class="btn-nav active-tab">🤖 Chatbot</button>
+        <button onclick="switchView('turtle')" id="nav-btn-turtle" class="btn-nav python-highlight">🐢 Turtle UI</button>
+        <button onclick="switchView('quiz')" id="nav-btn-quiz" class="btn-nav">🏆 Safety Quiz</button>
+        <button onclick="openSafetyRulesModal()" class="btn-nav">📜 Safety Rules</button>
+        <button onclick="openReportModal()" class="btn-nav">🚨 Report 1930</button>
+        <button onclick="resetChat()" class="btn-nav" title="Start fresh conversation">🔄 Reset</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content Container -->
+  <main class="page-container">
+
+    <!-- Mode Selector Bar -->
+    <div class="view-switcher-bar">
+      <div class="tabs-group">
+        <button onclick="switchView('chat')" id="tab-chat" class="tab-btn active">
+          🤖 Interactive Web Chatbot
+        </button>
+        <button onclick="switchView('turtle')" id="tab-turtle" class="tab-btn">
+          🐢 Turtle UI
+        </button>
+        <button onclick="switchView('quiz')" id="tab-quiz" class="tab-btn">
+          📝 Cyber Safety Quiz & Certificate
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Chatbot Main Card -->
+    <section class="chatbot-card" id="chat-section">
+      <!-- Quick Demo Scenario Chips Header -->
+      <div class="scenarios-chips-bar">
+        <div class="chips-label">
+          <span>✨ Quick Demo Scenarios (Click to test instantly):</span>
+        </div>
+        <div class="chips-list">
+          <button class="chip-btn" onclick="selectScenario('qr')">
+            <span>📷</span>
+            <span>Fake QR Code Scam</span>
+          </button>
+          <button class="chip-btn" onclick="selectScenario('collect')">
+            <span>💸</span>
+            <span>Collect-Request Reverse</span>
+          </button>
+          <button class="chip-btn" onclick="selectScenario('kyc')">
+            <span>⚡</span>
+            <span>Fake Customer Care / KYC</span>
+          </button>
+          <button class="chip-btn" onclick="selectScenario('screen')">
+            <span>📱</span>
+            <span>Screen-Sharing (AnyDesk)</span>
+          </button>
+          <button class="chip-btn" onclick="selectScenario('arrest')">
+            <span>👮</span>
+            <span>Digital Arrest Extortion</span>
+          </button>
+          <button class="chip-btn" onclick="selectScenario('reward')">
+            <span>🎁</span>
+            <span>Fake Rewards / Cashback</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Transcript Area (Pre-rendered greeting ensures no empty container) -->
+      <div class="chat-transcript" id="chat-messages">
+        <div class="bot-message" id="welcome-message">
+          <div class="msg-author">🤖 Raksha (Cyber Safety Assistant)</div>
+          <div class="msg-content">
+            Namaste! I am <strong>Raksha</strong>, your UPI Cyber Safety Assistant. 🛡️<br><br>
+            Did someone send you a suspicious QR code, an unexpected "Collect Request", a lottery link, or call pretending to be your bank or police?<br><br>
+            <strong>Type your situation below</strong> or <strong>click any of the quick demo buttons above</strong> to begin the cyber safety investigation!
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="typing-box" id="typing-indicator">
+        🤖 Raksha is analyzing the situation...
+      </div>
+
+      <!-- Chat Input Bar -->
+      <div class="chat-input-bar">
+        <form class="chat-form" onsubmit="event.preventDefault(); startAnalysis(document.getElementById('chat-input').value);">
+          <input
+            type="text"
+            id="chat-input"
+            class="chat-input"
+            placeholder="Describe your situation (e.g., 'Someone on OLX asked me to scan a QR code to receive money...')"
+            autocomplete="off"
+          />
+          <button type="submit" class="btn-send">
+            Analyze 🚀
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Turtle Interactive Graphics Studio -->
+    <section class="turtle-studio-card" id="turtle-section">
+      <div class="turtle-header-bar">
+        <div class="turtle-title-area">
+          <span class="turtle-icon-badge">🐢</span>
+          <div>
+            <div class="turtle-title">Turtle UI</div>
+            <div class="turtle-subtitle">Interactive visual fraud threat meter & security shield generator</div>
+          </div>
+        </div>
+        <div class="turtle-controls">
+          <button class="btn-turtle-control btn-turtle-run" onclick="runTurtleDemo('qr')">▶️ Run QR Scam Test</button>
+          <button class="btn-turtle-control" onclick="runTurtleDemo('arrest')">▶️ Digital Arrest Test</button>
+          <button class="btn-turtle-control" onclick="runTurtleDemo('screen')">▶️ AnyDesk Test</button>
+          <button class="btn-turtle-control" onclick="clearTurtleCanvas()">🧹 Clear Canvas</button>
+        </div>
+      </div>
+
+      <div class="turtle-body-grid">
+        <div class="turtle-canvas-wrap">
+          <canvas id="turtle-canvas" width="620" height="460"></canvas>
+          <div style="font-size: 11px; color: #94a3b8; margin-top: 8px;">
+            Canvas renders vector graphics corresponding to <code>import turtle; t = turtle.Turtle()</code>
+          </div>
+        </div>
+
+        <div class="turtle-sidebar">
+          <div class="turtle-sidebar-heading">Select Turtle Demo:</div>
+          <button class="turtle-scenario-btn" onclick="runTurtleDemo('qr')">
+            <strong>📷 1. Fake QR Code Threat (80%)</strong><br>
+            <span style="font-size: 11px; opacity: 0.8;">Draws Red Shield & QR Golden Rule</span>
+          </button>
+          <button class="turtle-scenario-btn" onclick="runTurtleDemo('arrest')">
+            <strong>👮 2. Digital Arrest Extortion (100%)</strong><br>
+            <span style="font-size: 11px; opacity: 0.8;">Draws Critical Alert & Police Verdict</span>
+          </button>
+          <button class="turtle-scenario-btn" onclick="runTurtleDemo('screen')">
+            <strong>📱 3. AnyDesk Screen Takeover (95%)</strong><br>
+            <span style="font-size: 11px; opacity: 0.8;">Draws Remote App Warning Gauge</span>
+          </button>
+          <button class="turtle-scenario-btn" onclick="runTurtleDemo('safe')">
+            <strong>🛡️ 4. Clean & Safe Account (0%)</strong><br>
+            <span style="font-size: 11px; opacity: 0.8;">Draws Green Safe Security Shield</span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Cyber Safety Interactive Quiz & Certificate Section -->
+    <section class="quiz-card" id="quiz-section">
+      <!-- Quiz Header Bar -->
+      <div class="quiz-header-bar">
+        <div class="quiz-title-wrap">
+          <span class="quiz-icon-badge">🛡️</span>
+          <div>
+            <div class="quiz-title">Cyber Safety Quiz: Test Your UPI Defense</div>
+            <div class="quiz-subtitle">Answer 5 real-world scam challenges & earn your Cyber Warrior Badge & Certificate</div>
+          </div>
+        </div>
+        <div id="quiz-stats-badge" class="quiz-status-pill">
+          <span>Question</span>
+          <span id="quiz-step-text">1 of 5</span>
+          <span>•</span>
+          <span>Score: <strong id="quiz-score-text">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Progress Track -->
+      <div class="quiz-progress-track">
+        <div class="quiz-progress-fill" id="quiz-progress-bar" style="width: 20%;"></div>
+      </div>
+
+      <!-- Quiz Body: Dynamic Card -->
+      <div class="quiz-body" id="quiz-body">
+        <!-- In-Progress Question Card -->
+        <div id="quiz-question-view" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="quiz-scenario-card">
+            <div class="scenario-meta">
+              <span class="scenario-tag" id="scenario-category-tag">SCENARIO 1: MARKETPLACE SCAM</span>
+              <span class="scenario-points">⭐️ 1 Point</span>
+            </div>
+            <div class="scenario-question-text" id="scenario-title-text">
+              Loading question...
+            </div>
+            <div class="scenario-detail-box" id="scenario-situation-text">
+              Loading scenario details...
+            </div>
+          </div>
+
+          <div class="quiz-options-grid" id="quiz-options-container">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Explanation / Feedback box (hidden until user clicks an option) -->
+          <div class="quiz-feedback-box" id="quiz-feedback-box" style="display: none;">
+            <div class="feedback-title" id="feedback-verdict-title"></div>
+            <div class="feedback-explanation" id="feedback-explanation-text"></div>
+            <div class="feedback-rule" id="feedback-rule-text"></div>
+            <div class="quiz-action-bar">
+              <button class="btn-quiz-next" id="btn-quiz-next" onclick="nextQuizQuestion()">
+                <span>Next Challenge</span>
+                <span>➡️</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Completed Result & Certificate View (hidden until quiz is done) -->
+        <div id="quiz-result-view" class="quiz-result-view" style="display: none;">
+          <!-- Result Hero Banner -->
+          <div class="result-hero-box">
+            <div class="result-text-area">
+              <div class="result-verdict" id="result-verdict-headline">Outstanding! Certified Cyber Warrior</div>
+              <div class="result-desc" id="result-verdict-desc">
+                You passed the Cyber Safety assessment with exemplary knowledge of UPI safety, QR security, and fraud defense protocols.
+              </div>
+            </div>
+            <div class="result-score-circle" id="result-score-circle">
+              <div class="score-inner">
+                <div class="score-big" id="result-score-display">5/5</div>
+                <div class="score-label" id="result-percent-display">100%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personalized Certificate Name Input -->
+          <div class="name-input-card">
+            <label for="cert-user-name">Enter your full name for your official certificate:</label>
+            <input type="text" id="cert-user-name" class="name-field" placeholder="e.g. Aarav Sharma" maxlength="40" value="Cyber Defender" />
+            <button class="btn-update-name" onclick="updateCertificateName()">Update Certificate</button>
+          </div>
+
+          <!-- Certificate View Container -->
+          <div class="certificate-wrap">
+            <div class="certificate-container" id="printable-certificate">
+              <div class="cert-inner-border">
+                <!-- Ornate corner decorations -->
+                <div class="cert-corner-flower cert-tl">✦</div>
+                <div class="cert-corner-flower cert-tr">✦</div>
+                <div class="cert-corner-flower cert-bl">✦</div>
+                <div class="cert-corner-flower cert-br">✦</div>
+
+                <div class="cert-header">
+                  <div class="cert-org">NATIONAL CYBER SAFETY & FRAUD PREVENTION INITIATIVE</div>
+                  <h1 class="cert-main-title">Certificate of Achievement</h1>
+                  <div class="cert-subtitle">Cybersecurity Awareness & UPI Digital Fraud Defense</div>
+                </div>
+
+                <div class="cert-presentation-text">
+                  This official credential certifies that
+                </div>
+
+                <div class="cert-name-center">
+                  <div class="cert-recipient-name" id="cert-display-name">Cyber Defender</div>
+                </div>
+
+                <div class="cert-body-text">
+                  has demonstrated exemplary proficiency and critical vigilance in identifying and neutralizing 
+                  <strong>Fake QR Codes, Collect-Request Frauds, Screen-Sharing Exploits, Fake Customer Care, and Digital Arrest Syndicates</strong>, 
+                  achieving a verified score of <strong id="cert-display-score">5 out of 5 (100%)</strong>.
+                </div>
+
+                <!-- Badges & Official Verification Row -->
+                <div class="cert-badge-row">
+                  <div class="cert-badge-item">
+                    <div class="cert-meta-label">Issued On</div>
+                    <div class="cert-meta-val" id="cert-display-date">October 27, 2026</div>
+                    <div class="cert-meta-item" style="margin-top: 4px;">National Safety Drive</div>
+                  </div>
+
+                  <div class="cert-badge-item">
+                    <div class="cert-warrior-seal">
+                      <div class="seal-icon">🛡️</div>
+                      <div class="seal-text">Cyber Warrior</div>
+                    </div>
+                  </div>
+
+                  <div class="cert-badge-item">
+                    <div class="cert-meta-label">Certificate ID</div>
+                    <div class="cert-meta-val" id="cert-display-id">CW-UPI-2026-8941</div>
+                    <div class="cert-meta-item" style="color: #059669; font-weight: 700; margin-top: 4px;">Verified 1930 Compliant</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Action Buttons -->
+          <div class="cert-actions-bar">
+            <button class="btn-cert-download" onclick="downloadCertificateImage()">
+              <span>📥</span>
+              <span>Download Official Certificate (PNG)</span>
+            </button>
+            <button class="btn-cert-print" onclick="printCertificate()">
+              <span>🖨️</span>
+              <span>Print Certificate</span>
+            </button>
+            <button class="btn-cert-retake" onclick="retakeQuiz()">
+              <span>🔄</span>
+              <span>Retake Quiz</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 Official UPI Safety Rules Section -->
+    <section class="section-card" id="rules-section">
+      <h2 class="section-title">
+        📜 6 Official UPI Cyber Safety Rules
+      </h2>
+      <p class="section-subtitle">
+        Cybersecurity Mantra: Safe UPI, Safe India (Aligned with RBI Kehta Hai & NPCI Guidelines)
+      </p>
+
+      <div class="cards-grid">
+        <div class="card-item">
+          <div class="rule-num">Rule 01</div>
+          <strong>The Golden PIN Rule</strong>
+          <p>
+            UPI PIN is ONLY entered to DEDUCT money from your account. You NEVER need to enter your PIN to receive money, prizes, or refunds!
+          </p>
+        </div>
+
+        <div class="card-item">
+          <div class="rule-num">Rule 02</div>
+          <strong>The QR Code Reality</strong>
+          <p>
+            QR codes work in ONE direction only: to SEND money. Scanning a QR code sent to you on WhatsApp will drain your balance, not credit it.
+          </p>
+        </div>
+
+        <div class="card-item">
+          <div class="rule-num">Rule 03</div>
+          <strong>Zero Screen-Sharing</strong>
+          <p>
+            Never install AnyDesk, TeamViewer, RustDesk, or QuickSupport on instructions from any caller. They can view your screen and steal OTPs.
+          </p>
+        </div>
+
+        <div class="card-item">
+          <div class="rule-num">Rule 04</div>
+          <strong>No "Digital Arrest" in Law</strong>
+          <p>
+            Indian police and CBI NEVER place citizens under "Digital Arrest" over Skype or WhatsApp video call, nor do they demand money on UPI.
+          </p>
+        </div>
+
+        <div class="card-item">
+          <div class="rule-num">Rule 05</div>
+          <strong>Decline Unknown Collect Requests</strong>
+          <p>
+            If your UPI app pops up asking you to "Pay ₹5,000" to receive cashback or prize money, immediately click DECLINE.
+          </p>
+        </div>
+
+        <div class="card-item">
+          <div class="rule-num">Rule 06</div>
+          <strong>Golden Golden Hour (1930)</strong>
+          <p>
+            If defrauded, call 1930 within 2 to 3 hours ("The Golden Hour") to freeze the stolen funds before the scammer can cash them out.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: 6 Safety Rules Full Guide -->
+  <div class="modal-overlay" id="safety-rules-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">🛡️ Official UPI Safety Handbook</div>
+        <button class="btn-close-modal" onclick="closeSafetyRulesModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Remember these 4 Key Principles for UPI Cyber Safety:</strong></p>
+        <ol style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <li><strong>UPI PIN is a Debit Key:</strong> Never enter it to accept payments.</li>
+          <li><strong>QR Code = Sending Money:</strong> You only need to share your mobile number or UPI ID (e.g. name@okhdfcbank) to receive money.</li>
+          <li><strong>Remote Desktop = Device Hijack:</strong> Customer care will never ask you to install AnyDesk or TeamViewer.</li>
+          <li><strong>Government Agencies Don't Call on WhatsApp Video:</strong> Police, CBI, and RBI never ask for payments over UPI.</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-nav" onclick="closeSafetyRulesModal()">Understood</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Emergency 1930 Reporting Center -->
+  <div class="modal-overlay" id="report-fraud-modal">
+    <div class="modal-box" style="max-width: 680px;">
+      <div class="modal-header danger-modal">
+        <div class="modal-title">🚨 Emergency 1930 Helpline & Complaint Guide</div>
+        <button class="btn-close-modal" onclick="closeReportModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div style="background-color: #fee2e2; border: 1px solid #f87171; padding: 12px; border-radius: 10px; color: #991b1b;">
+          <strong>ACT FAST! The first 2 hours are known as "The Golden Hour".</strong><br>
+          Calling 1930 promptly gives cyber police the best chance of freezing the fraudster's beneficiary bank account.
+        </div>
+
+        <div>
+          <strong style="color: #0f172a;">Step-by-Step Reporting Procedure:</strong>
+          <ol style="margin-left: 20px; margin-top: 6px; display: flex; flex-direction: column; gap: 6px;">
+            <li><strong>Dial 1930:</strong> Call from your registered mobile phone.</li>
+            <li><strong>Provide Details:</strong> Note down your bank name, account number, transaction UTR number (12 digits), and date/time.</li>
+            <li><strong>Acknowledgement SMS:</strong> You will receive a formal incident complaint ID.</li>
+            <li><strong>File on Portal:</strong> Visit <a href="https://cybercrime.gov.in" target="_blank" style="color: #4f46e5; font-weight: 700;">cybercrime.gov.in</a> to upload transaction screenshots.</li>
+          </ol>
+        </div>
+
+        <div>
+          <strong style="color: #0f172a;">Official Police Complaint Draft (Copy & Paste):</strong>
+          <pre class="code-box" id="complaint-template" style="margin-top: 6px; font-size: 11px;">To,
+The Cyber Crime Cell & Bank Branch Manager,
+Subject: Urgent Complaint Regarding Unauthorized UPI Cyber Fraud Incident
+
+Respected Sir/Madam,
+I wish to report an unauthorized financial cyber fraud that occurred on [Date & Time].
+• Complainant Name: [Your Name]
+• Amount Lost: ₹[Amount]
+• Bank UTR / Reference ID: [12-digit UTR Number]
+• Scammer Phone / UPI ID: [Scammer Number or VPA]
+• Scam Type: [Fake QR / Collect Request / AnyDesk / Digital Arrest]
+
+I request you to immediately freeze the beneficiary account and initiate a chargeback recall.
+Sincerely,
+[Your Name]
+[Phone Number]</pre>
+          <button onclick="copyComplaintText()" class="btn-nav" style="margin-top: 8px; font-weight: 700;">📋 Copy Complaint Draft</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-nav" onclick="closeReportModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>SurakshaUPI</strong> • UPI Fraud Awareness & Cyber Safety Initiative</p>
+    <p style="margin-top: 4px;">National Cyber Crime Reporting Helpline: <strong>1930</strong> • Portal: <strong>cybercrime.gov.in</strong></p>
+  </footer>
+
+  <!-- Self-contained Vanilla JavaScript Engine -->
+  <script>
+    /**
+     * SurakshaUPI: Client Engine
+     * Self-contained UPI fraud classification and reporting system
+     */
+
+    // Knowledge Base (mirrors upi_fraud_chatbot.py)
+    const KEYWORD_MAP = {
+      QR_CODE_RECEIVE: ['qr', 'qr code', 'scan', 'scan qr', 'receive payment', 'receive money', 'advance payment', 'olx', 'quikr', 'marketplace'],
+      COLLECT_REQUEST: ['collect', 'collect request', 'request money', 'click pay', 'approve request', 'accept payment', 'pay request'],
+      FAKE_CUSTOMER_CARE: ['customer care', 'bank executive', 'kyc', 'kyc update', 'account blocked', 'sim blocked', 'electricity bill', 'power cut', 'deactivated'],
+      SCREEN_SHARING: ['anydesk', 'teamviewer', 'rustdesk', 'quicksupport', 'screen share', 'remote access', 'install app'],
+      DIGITAL_ARREST: ['digital arrest', 'cbi', 'police', 'customs', 'fedex', 'narcotics', 'drugs', 'skype call', 'whatsapp video call', 'arrest warrant', 'deposit'],
+      FAKE_REWARDS: ['lottery', 'scratch card', 'cashback', 'won', 'winner', 'flipkart prize', 'telegram task', 'free gift', 'spin the wheel']
+    };
+
+    const DEMO_SCENARIOS = {
+      'qr': {
+        title: 'Fake QR Code Scam',
+        prompt: 'Someone on OLX wants to buy my study table. He sent a QR code on WhatsApp and said: "Scan this QR code and approve on PhonePe to receive ₹4,500 advance payment".'
+      },
+      'collect': {
+        title: 'Collect-Request Reverse Fraud',
+        prompt: 'A caller claiming to be an event sponsor said he sent ₹2,000. Then Google Pay showed a notification saying "Pay ₹2,000". He says: "Click Pay and enter PIN to accept money".'
+      },
+      'kyc': {
+        title: 'Fake Customer Care / KYC',
+        prompt: 'Received an SMS from a 10-digit number: "Dear Customer, your electricity connection / SIM card will be deactivated in 2 hours due to pending KYC. Call 9831xxxxxx immediately".'
+      },
+      'screen': {
+        title: 'Screen-Sharing (AnyDesk)',
+        prompt: 'My movie ticket refund was pending. The customer care executive on Google asked me to install AnyDesk from Play Store so he can process my refund.'
+      },
+      'arrest': {
+        title: 'Digital Arrest Scam',
+        prompt: 'A man in police uniform on WhatsApp video call claiming to be CBI says an illegal courier with drugs and passport was found in my name. He put me under "Digital Arrest" and demands ₹50,000 on UPI.'
+      },
+      'reward': {
+        title: 'Fake Rewards / Cashback',
+        prompt: 'Got a link on WhatsApp: "Congratulations! You won ₹15,000 Festive Cashback on Google Pay. Click below to deposit into bank account". When I clicked, it opened UPI app asking for PIN.'
+      }
+    };
+
+    let currentCategory = null;
+    let pendingQuestions = [];
+    let currentQuestionIndex = 0;
+    let highRiskCount = 0;
+    let currentUserQuery = '';
+    let currentSessionAnswers = [];
+    let isHistoryDrawerOpen = false;
+
+    // Local Storage Configuration ('save previous chats for a few time')
+    const CHAT_STORAGE_KEY = 'suraksha_upi_saved_chats_v1';
+    const CHAT_RETENTION_TTL_MS = 1 * 60 * 60 * 1000; // 1 hour TTL
+
+    // DOM Elements
+    let chatMessagesEl;
+    let chatInputEl;
+    let typingIndicatorEl;
+
+    function initChatbot() {
+      chatMessagesEl = document.getElementById('chat-messages');
+      chatInputEl = document.getElementById('chat-input');
+      typingIndicatorEl = document.getElementById('typing-indicator');
+      renderHistoryBanner();
+    }
+
+    // Local Storage Chat History Functions
+    function getSavedChats() {
+      try {
+        const raw = localStorage.getItem(CHAT_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        const now = Date.now();
+        // Auto-expire items older than 1 hour
+        const valid = parsed.filter(item => item && (now - (item.epoch || 0)) < CHAT_RETENTION_TTL_MS);
+        if (valid.length !== parsed.length) {
+          localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(valid));
+        }
+        return valid.slice(0, 15);
+      } catch (e) {
+        console.warn('Unable to retrieve saved chats', e);
+        return [];
+      }
+    }
+
+    function saveSessionToStorage(sessionObj) {
+      try {
+        const list = getSavedChats();
+        const updated = [sessionObj, ...list.filter(s => s.id !== sessionObj.id)].slice(0, 15);
+        localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(updated));
+        renderHistoryBanner();
+      } catch (e) {
+        console.warn('Unable to save chat session', e);
+      }
+    }
+
+    function clearSavedHistory() {
+      if (confirm('Are you sure you want to delete all saved previous chat investigations?')) {
+        try {
+          localStorage.removeItem(CHAT_STORAGE_KEY);
+          isHistoryDrawerOpen = false;
+          renderHistoryBanner();
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+    }
+
+    function toggleSavedHistory() {
+      isHistoryDrawerOpen = !isHistoryDrawerOpen;
+      renderHistoryBanner();
+    }
+
+    function loadHistoryItemIntoChat(itemId) {
+      const chats = getSavedChats();
+      const item = chats.find(c => c.id === itemId);
+      if (!item) return;
+      if (chatInputEl) chatInputEl.value = item.query;
+      startAnalysis(item.query);
+    }
+
+    function renderHistoryBanner() {
+      if (!chatMessagesEl) {
+        chatMessagesEl = document.getElementById('chat-messages');
+      }
+      if (!chatMessagesEl) return;
+
+      const existingBanner = document.getElementById('history-banner');
+      if (existingBanner) existingBanner.remove();
+
+      const savedChats = getSavedChats();
+      if (savedChats.length === 0) return;
+
+      const welcomeMsg = document.getElementById('welcome-message');
+
+      const banner = document.createElement('div');
+      banner.id = 'history-banner';
+      banner.className = 'history-banner';
+
+      banner.innerHTML = `
+        <div class="history-banner-header">
+          <div class="history-info-group">
+            <span style="font-size: 16px;">🕰️</span>
+            <div>
+              <span style="font-weight: 700; color: #1e293b;">Previous Investigations</span>
+              <span class="history-badge">${savedChats.length} saved</span>
+              <span style="font-size: 11px; color: #64748b; margin-left: 4px;">(Retained for 1 hour)</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button type="button" class="btn-history-toggle" onclick="toggleSavedHistory()">
+              <span>${isHistoryDrawerOpen ? '📁 Hide Previous Chats' : '📂 View Previous Chats (' + savedChats.length + ')'}</span>
+            </button>
+            <button type="button" class="btn-history-clear" onclick="clearSavedHistory()" title="Clear saved history">
+              🗑️ Clear
+            </button>
+          </div>
+        </div>
+        <div class="history-drawer" id="history-drawer" style="display: ${isHistoryDrawerOpen ? 'flex' : 'none'};">
+          ${savedChats.map(c => `
+            <div class="history-item-card">
+              <div class="history-item-header">
+                <div>
+                  <span class="history-item-threat ${(c.riskLevel || 'medium').toLowerCase()}">${c.riskScore}% THREAT • ${c.riskLevel}</span>
+                  <strong style="margin-left: 6px; font-size: 13px; color: #1e293b;">${escapeHtml(c.categoryName || c.title)}</strong>
+                </div>
+                <span class="history-item-time">${c.timestamp}</span>
+              </div>
+              <div class="history-item-prompt">
+                👤 "${escapeHtml(c.query)}"
+              </div>
+              ${c.answers && c.answers.length > 0 ? `
+                <div style="font-size: 11px; color: #64748b; margin-bottom: 6px; padding: 6px 10px; background: #f1f5f9; border-radius: 6px; line-height: 1.45;">
+                  ${c.answers.map(a => `• <em>${escapeHtml(a.question)}</em> &rarr; <strong>${escapeHtml(a.answer)}</strong>`).join('<br>')}
+                </div>
+              ` : ''}
+              <div class="history-item-details">
+                <strong>Diagnosis:</strong> ${escapeHtml(c.summary)}
+              </div>
+              ${c.goldenRule ? `
+                <div class="history-item-rule">
+                  💡 <strong>Golden Rule:</strong> "${escapeHtml(c.goldenRule)}"
+                </div>
+              ` : ''}
+              <div class="history-item-actions">
+                <button type="button" class="btn-history-retest" onclick="readAloud('${escapeForJsString(c.title)}. ${escapeForJsString(c.goldenRule)}')" style="background: #059669;">
+                  🔊 Listen
+                </button>
+                <button type="button" class="btn-history-retest" onclick="loadHistoryItemIntoChat('${c.id}')">
+                  🔄 Retest in Chat
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      if (welcomeMsg && welcomeMsg.nextSibling) {
+        chatMessagesEl.insertBefore(banner, welcomeMsg.nextSibling);
+      } else {
+        chatMessagesEl.appendChild(banner);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeForJsString(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, ' ');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initChatbot);
+    } else {
+      initChatbot();
+    }
+
+    // Category detector
+    function detectCategory(text) {
+      const t = text.toLowerCase();
+      
+      if (t.includes('digital arrest') || ((t.includes('cbi') || t.includes('police')) && (t.includes('deposit') || t.includes('narcotics') || t.includes('drugs')))) {
+        return 'DIGITAL_ARREST';
+      }
+      if (['anydesk', 'teamviewer', 'rustdesk', 'quicksupport', 'screen share'].some(app => t.includes(app))) {
+        return 'SCREEN_SHARING';
+      }
+      if (KEYWORD_MAP.QR_CODE_RECEIVE.some(kw => t.includes(kw)) && (t.includes('qr') || t.includes('scan'))) {
+        return 'QR_CODE_RECEIVE';
+      }
+      if (KEYWORD_MAP.COLLECT_REQUEST.some(kw => t.includes(kw))) {
+        return 'COLLECT_REQUEST';
+      }
+      if (KEYWORD_MAP.FAKE_REWARDS.some(kw => t.includes(kw))) {
+        return 'FAKE_REWARDS';
+      }
+      if (KEYWORD_MAP.FAKE_CUSTOMER_CARE.some(kw => t.includes(kw))) {
+        return 'FAKE_CUSTOMER_CARE';
+      }
+      return 'GENERAL_SUSPICIOUS';
+    }
+
+    // Clarifying questions
+    function getQuestions(category) {
+      const map = {
+        QR_CODE_RECEIVE: [
+          {
+            text: "Question 1: Are you scanning this QR code to RECEIVE money into your account or to pay someone?",
+            options: [
+              { label: "To RECEIVE money (Advance / Cashback / Sale)", isHighRisk: true },
+              { label: "To PAY a genuine verified merchant", isHighRisk: false }
+            ]
+          },
+          {
+            text: "Question 2: Does your UPI app (GPay / PhonePe / Paytm) prompt you to enter your Secret UPI PIN?",
+            options: [
+              { label: "Yes, it asks for Secret UPI PIN", isHighRisk: true },
+              { label: "No PIN requested", isHighRisk: false }
+            ]
+          }
+        ],
+        COLLECT_REQUEST: [
+          {
+            text: "Question 1: Does the notification say 'PAY' or 'COLLECT REQUEST' from an unknown person?",
+            options: [
+              { label: "Yes, it says 'Pay' and asks for PIN", isHighRisk: true },
+              { label: "No, it says 'Money Received'", isHighRisk: false }
+            ]
+          },
+          {
+            text: "Question 2: Is the caller instructing you on call: 'Press Pay and enter PIN to receive money'?",
+            options: [
+              { label: "Yes, they claim pressing Pay will credit money", isHighRisk: true },
+              { label: "No, this is my own bill payment", isHighRisk: false }
+            ]
+          }
+        ],
+        FAKE_CUSTOMER_CARE: [
+          {
+            text: "Question 1: Is the caller or SMS threatening that your bank, SIM, or electricity will be blocked within hours?",
+            options: [
+              { label: "Yes, creating panic and extreme urgency", isHighRisk: true },
+              { label: "No urgency mentioned", isHighRisk: false }
+            ]
+          },
+          {
+            text: "Question 2: Did they ask for OTP, send an APK link, or ask for a ₹10 'verification payment'?",
+            options: [
+              { label: "Yes, asked for OTP / APK / test payment", isHighRisk: true },
+              { label: "No secret credentials asked", isHighRisk: false }
+            ]
+          }
+        ],
+        SCREEN_SHARING: [
+          {
+            text: "Question 1: Did the person ask you to install AnyDesk, TeamViewer, RustDesk, or QuickSupport?",
+            options: [
+              { label: "Yes, instructed to install remote desktop app", isHighRisk: true },
+              { label: "No remote app requested", isHighRisk: false }
+            ]
+          },
+          {
+            text: "Question 2: Did they ask you to open your UPI or mobile banking app while screen is shared?",
+            options: [
+              { label: "Yes, told me to open UPI app and check balance", isHighRisk: true },
+              { label: "No banking app opened", isHighRisk: false }
+            ]
+          }
+        ],
+        DIGITAL_ARREST: [
+          {
+            text: "Question 1: Are they on video call in police uniform forbidding you from disconnecting or telling parents?",
+            options: [
+              { label: "Yes! Claiming Digital Arrest under CBI / Narcotics", isHighRisk: true },
+              { label: "No, standard written notice", isHighRisk: false }
+            ]
+          },
+          {
+            text: "Question 2: Are they demanding a UPI transfer into a 'Court Escrow / RBI Verification' account?",
+            options: [
+              { label: "Yes! Demanding money transfer for clearance", isHighRisk: true },
+              { label: "No money demanded", isHighRisk: false }
+            ]
+          }
+        ],
+        FAKE_REWARDS: [
+          {
+            text: "Question 1: Does the lottery or cashback page ask you to enter your Secret UPI PIN to claim?",
+            options: [
+              { label: "Yes, asks for UPI PIN to claim reward", isHighRisk: true },
+              { label: "No PIN asked, normal store coupon", isHighRisk: false }
+            ]
+          },
+          {
+            text: "Question 2: Did you receive this link from WhatsApp forward, unknown SMS, or Telegram?",
+            options: [
+              { label: "Yes, forwarded link from unknown source", isHighRisk: true },
+              { label: "No, inside official shopping app", isHighRisk: false }
+            ]
+          }
+        ],
+        GENERAL_SUSPICIOUS: [
+          {
+            text: "Did anyone ask for your Secret UPI PIN, OTP, or remote screen access?",
+            options: [
+              { label: "Yes, secret data or PIN requested", isHighRisk: true },
+              { label: "No secret data asked", isHighRisk: false }
+            ]
+          }
+        ]
+      };
+
+      return map[category] || map.GENERAL_SUSPICIOUS;
+    }
+
+    // Generate diagnosis report
+    function evaluateDiagnosis(category, count) {
+      const baseScores = {
+        DIGITAL_ARREST: 80,
+        SCREEN_SHARING: 75,
+        QR_CODE_RECEIVE: 60,
+        COLLECT_REQUEST: 60,
+        FAKE_REWARDS: 60,
+        FAKE_CUSTOMER_CARE: 50,
+        GENERAL_SUSPICIOUS: 40
+      };
+
+      const base = baseScores[category] || 40;
+      const score = Math.min(100, base + (count * 20));
+      const isDanger = score >= 65;
+
+      const reports = {
+        QR_CODE_RECEIVE: {
+          name: "Fake QR Code Reverse Scam",
+          title: "🚨 DANGER: 100% CONFIRMED UPI SCAM",
+          summary: "Scanning a QR code or typing your UPI PIN will DEDUCT money from your account, NOT credit it! The scammer is abusing the QR payment protocol.",
+          redFlags: [
+            "Scammer claims scanning a QR code is required to RECEIVE advance payment.",
+            "UPI PIN screen appears. Entering your PIN authorizes money deduction only.",
+            "Commonly seen when selling items on OLX, Quikr, or Facebook Marketplace."
+          ],
+          safeActions: [
+            "DO NOT scan the QR code or enter your Secret UPI PIN under any circumstances.",
+            "Disconnect the call and block the scammer's number immediately.",
+            "Remember: You only need to share your mobile number or UPI ID (VPA) to receive money."
+          ],
+          goldenRule: "QR Codes are ONLY used for SENDING money. You NEVER need to scan a QR code to receive money!"
+        },
+        COLLECT_REQUEST: {
+          name: "Collect-Request Reverse Payment Fraud",
+          title: "🚨 HIGH RISK: DECEPTIVE PAYMENT REQUEST",
+          summary: "The scammer sent an incoming 'Collect Request' to your UPI app. Clicking 'Pay' and typing your PIN transfers YOUR money to the scammer!",
+          redFlags: [
+            "Notification says 'Pay ₹...' instead of 'Money Received'.",
+            "Caller insists on phone: 'Press Pay and enter PIN to accept money into your account'.",
+            "Fake transaction descriptions like 'Cashback_Release' or 'Refund_Approved'."
+          ],
+          safeActions: [
+            "Click 'DECLINE' or 'REJECT' on the UPI collect request immediately.",
+            "Block and report the scammer's UPI ID inside your UPI app.",
+            "If money was deducted, immediately dial National Cyber Helpline 1930."
+          ],
+          goldenRule: "Entering your UPI PIN ALWAYS means money is LEAVING your bank account!"
+        },
+        FAKE_CUSTOMER_CARE: {
+          name: "Fake Customer Care & Urgency KYC Scam",
+          title: "⚠️ FRAUD ALERT: FAKE EXECUTIVE IMPERSONATION",
+          summary: "Banks, electricity boards, and telecom operators NEVER send SMS from 10-digit mobile numbers demanding instant UPI payments to prevent blockage.",
+          redFlags: [
+            "SMS comes from an ordinary mobile number (+91-9xxxxxxxxx) instead of an official bank header.",
+            "Extreme urgency created: 'Account will be permanently blocked in 2 hours'.",
+            "Asking you to make a ₹10 test payment or click an unverified .apk file."
+          ],
+          safeActions: [
+            "Do NOT call back on numbers sent in unsolicited SMS.",
+            "Only use customer care numbers printed on the back of your debit card.",
+            "Report the incident on National Cyber Crime Portal (1930)."
+          ],
+          goldenRule: "No bank or electricity company blocks services in 2 hours via WhatsApp or SMS!"
+        },
+        SCREEN_SHARING: {
+          name: "Screen-Sharing Remote Access Scam",
+          title: "🛑 CRITICAL DANGER: DEVICE TAKEOVER ATTEMPT",
+          summary: "Installing AnyDesk, TeamViewer, RustDesk, or QuickSupport gives the scammer full remote visibility of your smartphone screen, passwords, and incoming OTPs!",
+          redFlags: [
+            "Caller asked you to download AnyDesk / TeamViewer / QuickSupport.",
+            "They asked for the 9-digit remote connection code.",
+            "They instructed you to open your UPI or mobile banking app while connected."
+          ],
+          safeActions: [
+            "IMMEDIATELY UNINSTALL the remote desktop app (AnyDesk, TeamViewer) right now!",
+            "Turn off Wi-Fi and Mobile Data immediately to cut the connection.",
+            "Change your UPI PIN and NetBanking passwords from another secure device."
+          ],
+          goldenRule: "NEVER install remote access or screen-sharing apps on instructions from unknown callers!"
+        },
+        DIGITAL_ARREST: {
+          name: "Digital Arrest / Fake Police Video Extortion",
+          title: "⛔ CRITICAL EXTORTION: FAKE DIGITAL ARREST",
+          summary: "There is NO SUCH LEGAL CONCEPT as 'Digital Arrest' under Indian Law! Indian Police, CBI, ED, and Supreme Court NEVER conduct video trials or demand money on UPI.",
+          redFlags: [
+            "Video call on WhatsApp / Skype showing fake police uniform and station backdrop.",
+            "Claims your Aadhaar was found in illegal narcotics / money laundering parcels.",
+            "Threatens immediate arrest if you disconnect or inform parents ('Confidential Case').",
+            "Orders you to transfer funds to a 'Court Escrow / RBI Verification' UPI ID."
+          ],
+          safeActions: [
+            "DISCONNECT THE CALL IMMEDIATELY. You are completely safe; it is an organized syndicate.",
+            "Talk to your parents, school teachers, or trusted elders right away. Do not stay silent.",
+            "Call Cyber Crime Helpline 1930 immediately or visit your nearest local police station."
+          ],
+          goldenRule: "Indian Law has NO 'Digital Arrest'. Real Police NEVER demand UPI money transfers!"
+        },
+        FAKE_REWARDS: {
+          name: "Fake Lottery, Cashback & Scratch Card Scam",
+          title: "🎁 BOGUS PRIZE ALERT: CASHBACK / LOTTERY TRAP",
+          summary: "This is a clickbait trap. Scammers use attractive banners promising ₹10,000+ cashback to trick you into entering your UPI PIN on a phishing page.",
+          redFlags: [
+            "Promising huge cash prizes for a contest you never entered.",
+            "Requires entering your Secret UPI PIN to 'deposit reward'.",
+            "Unusual web links outside the official Google Pay / PhonePe app."
+          ],
+          safeActions: [
+            "Close the browser tab immediately.",
+            "Never enter your UPI PIN on any web link or scratch card page.",
+            "Legitimate cashbacks credit AUTOMATICALLY without requiring your PIN."
+          ],
+          goldenRule: "Genuine cashbacks credit AUTOMATICALLY. They NEVER require entering a UPI PIN!"
+        },
+        GENERAL_SUSPICIOUS: {
+          name: "Suspicious UPI Payment / Request",
+          title: isDanger ? "🚨 HIGH RISK UPI SITUATION" : "⚠️ SUSPICIOUS ACTIVITY",
+          summary: "Any unsolicited request where a stranger asks for your PIN, OTP, or remote screen share is almost always fraudulent.",
+          redFlags: [
+            "Unsolicited request involving money or secret credentials.",
+            "Pressure or urgency applied by an unknown caller."
+          ],
+          safeActions: [
+            "Never enter your UPI PIN to receive money.",
+            "Consult parents or teachers before taking action.",
+            "Call 1930 if money was debited."
+          ],
+          goldenRule: "When in doubt, STOP. Think before you PIN!"
+        }
+      };
+
+      const report = reports[category] || reports.GENERAL_SUSPICIOUS;
+      return {
+        ...report,
+        category,
+        riskScore: score,
+        riskLevel: score >= 85 ? "CRITICAL" : (score >= 65 ? "HIGH" : "MEDIUM")
+      };
+    }
+
+    // User starts analysis
+    function startAnalysis(text) {
+      if (!text || !text.trim()) return;
+      initChatbot();
+
+      const userText = text.trim();
+      addUserMessage(userText);
+      currentUserQuery = userText;
+      currentSessionAnswers = [];
+      if (chatInputEl) chatInputEl.value = '';
+
+      showTyping(true);
+
+      // Pattern matching
+      const category = detectCategory(userText);
+      currentCategory = category;
+      pendingQuestions = getQuestions(category);
+      currentQuestionIndex = 0;
+      highRiskCount = 0;
+
+      setTimeout(() => {
+        showTyping(false);
+        if (pendingQuestions.length > 0) {
+          askQuestion(pendingQuestions[0]);
+        } else {
+          showVerdict(evaluateDiagnosis(category, 0));
+        }
+      }, 500);
+    }
+
+    // Ask clarifying question with buttons
+    function askQuestion(q) {
+      const container = document.createElement('div');
+      container.className = 'bot-message question-card';
+
+      const qText = document.createElement('div');
+      qText.className = 'question-heading';
+      qText.innerText = q.text;
+      container.appendChild(qText);
+
+      const optionsBox = document.createElement('div');
+      optionsBox.className = 'question-options';
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-option';
+        btn.innerText = opt.label;
+        btn.onclick = () => {
+          // Disable all buttons in this question
+          const allBtns = optionsBox.querySelectorAll('button');
+          allBtns.forEach(b => b.disabled = true);
+          btn.classList.add('selected-option');
+
+          addUserMessage(opt.label);
+          currentSessionAnswers.push({ question: q.text, answer: opt.label });
+          if (opt.isHighRisk) highRiskCount++;
+          currentQuestionIndex++;
+
+          showTyping(true);
+          setTimeout(() => {
+            showTyping(false);
+            if (currentQuestionIndex < pendingQuestions.length) {
+              askQuestion(pendingQuestions[currentQuestionIndex]);
+            } else {
+              showVerdict(evaluateDiagnosis(currentCategory, highRiskCount));
+            }
+          }, 500);
+        };
+        optionsBox.appendChild(btn);
+      });
+
+      container.appendChild(optionsBox);
+      appendMessageElement(container);
+    }
+
+    // Show final diagnosis card
+    function showVerdict(res) {
+      const card = document.createElement('div');
+      card.className = `diagnosis-card ${res.riskScore >= 65 ? 'danger-card' : 'warning-card'}`;
+
+      const header = document.createElement('div');
+      header.className = 'diagnosis-header';
+      header.innerHTML = `
+        <div>
+          <div class="diag-title">${res.title}</div>
+          <div class="diag-cat">Scam Category: ${res.name}</div>
+        </div>
+        <div class="diag-badge">${res.riskScore}% THREAT</div>
+      `;
+      card.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'diagnosis-body';
+
+      // Threat meter bar
+      const meterWrap = document.createElement('div');
+      meterWrap.className = 'meter-wrap';
+      meterWrap.innerHTML = `
+        <div class="meter-label">Threat Severity: <strong>${res.riskLevel} (${res.riskScore}/100)</strong></div>
+        <div class="meter-bar-bg">
+          <div class="meter-bar-fill" style="width: ${res.riskScore}%;"></div>
+        </div>
+      `;
+      body.appendChild(meterWrap);
+
+      // Summary
+      const summaryBox = document.createElement('div');
+      summaryBox.className = 'diag-summary';
+      summaryBox.innerHTML = `<strong>Investigation Summary:</strong><p style="margin-top:4px;">${res.summary}</p>`;
+      body.appendChild(summaryBox);
+
+      // Red Flags
+      const flagsBox = document.createElement('div');
+      flagsBox.className = 'diag-flags';
+      flagsBox.innerHTML = `<strong>🚩 Red Flags Identified:</strong><ul>${res.redFlags.map(f => `<li>${f}</li>`).join('')}</ul>`;
+      body.appendChild(flagsBox);
+
+      // Safe Actions
+      const actionsBox = document.createElement('div');
+      actionsBox.className = 'diag-actions';
+      actionsBox.innerHTML = `<strong>🛡️ Recommended Safe Actions:</strong><ol>${res.safeActions.map(a => `<li>${a}</li>`).join('')}</ol>`;
+      body.appendChild(actionsBox);
+
+      // Golden Rule
+      const ruleBox = document.createElement('div');
+      ruleBox.className = 'diag-golden-rule';
+      ruleBox.innerHTML = `<span class="rule-tag">💡 GOLDEN CYBER RULE:</span><div class="rule-text">"${res.goldenRule}"</div>`;
+      body.appendChild(ruleBox);
+
+      // Action Buttons
+      const btnRow = document.createElement('div');
+      btnRow.className = 'diag-btn-row';
+      btnRow.innerHTML = `
+        <button class="btn-report-diag" onclick="openReportModal()">🚨 Report to 1930 Helpline</button>
+        <button class="btn-read-diag" onclick="readAloud('${res.title}. ${res.goldenRule}')">🔊 Listen Alert</button>
+        <button class="btn-turtle-diag" onclick="showTurtleForScam('${res.category}')">🐢 View in Turtle UI</button>
+        <button class="btn-reset-diag" onclick="resetChat()">🔄 Test Another Situation</button>
+      `;
+      body.appendChild(btnRow);
+
+      card.appendChild(body);
+      appendMessageElement(card);
+
+      // Save completed investigation to localStorage
+      saveSessionToStorage({
+        id: 'session_' + Date.now(),
+        epoch: Date.now(),
+        timestamp: new Date().toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }) + ' at ' + new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+        query: currentUserQuery,
+        category: res.category,
+        title: res.title,
+        categoryName: res.name,
+        riskScore: res.riskScore,
+        riskLevel: res.riskLevel,
+        summary: res.summary,
+        goldenRule: res.goldenRule,
+        redFlags: res.redFlags,
+        safeActions: res.safeActions,
+        answers: [...currentSessionAnswers]
+      });
+
+      // Ensure full card is smoothly scrolled into view
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (chatMessagesEl) {
+          chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        }
+      }, 100);
+    }
+
+    // Append chat messages
+    function addBotMessage(text) {
+      initChatbot();
+      const msg = document.createElement('div');
+      msg.className = 'bot-message';
+      msg.innerHTML = `<div class="msg-author">🤖 Raksha (Cyber Safety Assistant)</div><div class="msg-content">${text.replace(/\n/g, '<br>')}</div>`;
+      appendMessageElement(msg);
+    }
+
+    function addUserMessage(text) {
+      initChatbot();
+      const msg = document.createElement('div');
+      msg.className = 'user-message';
+      msg.innerHTML = `<div class="msg-author">👤 You</div><div class="msg-content">${text}</div>`;
+      appendMessageElement(msg);
+    }
+
+    function appendMessageElement(el) {
+      initChatbot();
+      if (chatMessagesEl) {
+        chatMessagesEl.appendChild(el);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        setTimeout(() => {
+          chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        }, 60);
+      }
+    }
+
+    function showTyping(show) {
+      initChatbot();
+      if (typingIndicatorEl) {
+        typingIndicatorEl.style.display = show ? 'block' : 'none';
+        if (chatMessagesEl) chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+      }
+    }
+
+    // User selects demo scenario
+    function selectScenario(scenarioKey) {
+      const sc = DEMO_SCENARIOS[scenarioKey];
+      if (sc) {
+        startAnalysis(sc.prompt);
+      }
+    }
+
+    // Reset Chat
+    function resetChat() {
+      initChatbot();
+      if (chatMessagesEl) {
+        chatMessagesEl.innerHTML = `
+          <div class="bot-message" id="welcome-message">
+            <div class="msg-author">🤖 Raksha (Cyber Safety Assistant)</div>
+            <div class="msg-content">
+              Chat reset! Ready to investigate another UPI situation. 🛡️<br><br>
+              Describe what happened below or click one of the quick scenario buttons above to test.
+            </div>
+          </div>
+        `;
+        renderHistoryBanner();
+      }
+      currentCategory = null;
+      pendingQuestions = [];
+      currentQuestionIndex = 0;
+      highRiskCount = 0;
+      currentSessionAnswers = [];
+    }
+
+    // Read Aloud using Web Speech API
+    function readAloud(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Switch between Chat, Turtle, and Quiz views
+    function switchView(mode) {
+      const chatSection = document.getElementById('chat-section');
+      const turtleSection = document.getElementById('turtle-section');
+      const quizSection = document.getElementById('quiz-section');
+      const tabChat = document.getElementById('tab-chat');
+      const tabTurtle = document.getElementById('tab-turtle');
+      const tabQuiz = document.getElementById('tab-quiz');
+      const navBtnChat = document.getElementById('nav-btn-chat');
+      const navBtnTurtle = document.getElementById('nav-btn-turtle');
+      const navBtnQuiz = document.getElementById('nav-btn-quiz');
+
+      // Hide all first
+      if (chatSection) chatSection.style.display = 'none';
+      if (turtleSection) turtleSection.style.display = 'none';
+      if (quizSection) quizSection.style.display = 'none';
+
+      if (tabChat) tabChat.classList.remove('active');
+      if (tabTurtle) tabTurtle.classList.remove('turtle-active');
+      if (tabQuiz) tabQuiz.classList.remove('quiz-active');
+
+      if (navBtnChat) navBtnChat.classList.remove('active-tab');
+      if (navBtnTurtle) navBtnTurtle.classList.remove('active-tab');
+      if (navBtnQuiz) navBtnQuiz.classList.remove('active-tab');
+
+      if (mode === 'turtle') {
+        if (turtleSection) turtleSection.style.display = 'block';
+        if (tabTurtle) tabTurtle.classList.add('turtle-active');
+        if (navBtnTurtle) navBtnTurtle.classList.add('active-tab');
+        runTurtleDemo('qr');
+      } else if (mode === 'quiz') {
+        if (quizSection) quizSection.style.display = 'block';
+        if (tabQuiz) tabQuiz.classList.add('quiz-active');
+        if (navBtnQuiz) navBtnQuiz.classList.add('active-tab');
+        initQuizView();
+      } else {
+        if (chatSection) chatSection.style.display = 'flex';
+        if (tabChat) tabChat.classList.add('active');
+        if (navBtnChat) navBtnChat.classList.add('active-tab');
+      }
+    }
+
+    // =========================================================================
+    // Cyber Safety Quiz & Cyber Warrior Badge / Certificate Engine
+    // =========================================================================
+    const QUIZ_QUESTIONS = [
+      {
+        id: 1,
+        category: "SCENARIO 1: MARKETPLACE & QR CODE",
+        title: "Selling an Old Bicycle Online (OLX / Marketplace)",
+        situation: "You posted an ad to sell your cycle for ₹3,500. A buyer messages: 'I am paying now. Scan this QR code and type your 6-digit UPI PIN to receive the ₹3,500 advance.' What is the safest action?",
+        options: [
+          { letter: "A", text: "Scan the QR code and type your UPI PIN to claim the ₹3,500.", isCorrect: false },
+          { letter: "B", text: "Ask the buyer to send ₹1 first to verify, then scan their QR code.", isCorrect: false },
+          { letter: "C", text: "Refuse and report them! You NEVER scan a QR code or enter your PIN to receive money.", isCorrect: true },
+          { letter: "D", text: "Forward the QR code to your friend to see if their account works.", isCorrect: false }
+        ],
+        explanation: "QR codes and UPI PINs are technically engineered ONLY for SENDING money out of your account. You NEVER need to scan a QR code or enter your PIN to receive funds. Sharing your mobile number or UPI ID (VPA) is sufficient.",
+        goldenRule: "Golden Rule: PIN is for PAYING. Scanning QR codes never receives money!"
+      },
+      {
+        id: 2,
+        category: "SCENARIO 2: URGENCY & REMOTE SCREEN SHARING",
+        title: "Urgent Call: Electricity / Telecom Account Blocking",
+        situation: "A caller claims: 'Your SIM/Electricity connection will be permanently terminated tonight. Install AnyDesk / QuickSupport so our bank officer can verify your KYC.' What should you do?",
+        options: [
+          { letter: "A", text: "Install the app quickly so your utility services are not disconnected.", isCorrect: false },
+          { letter: "B", text: "Hang up immediately! Never install remote desktop apps on instructions from unknown callers.", isCorrect: true },
+          { letter: "C", text: "Install it, but keep your eyes closed during the process.", isCorrect: false },
+          { letter: "D", text: "Pay a ₹10 test fee through the remote screen app to clear the KYC.", isCorrect: false }
+        ],
+        explanation: "Apps like AnyDesk, TeamViewer, RustDesk, and QuickSupport mirror your phone screen in real-time. Once installed, scammers see your banking passwords, keypad entries, and incoming confidential OTPs.",
+        goldenRule: "Golden Rule: Legitimate companies and banks never ask you to install screen-sharing apps!"
+      },
+      {
+        id: 3,
+        category: "SCENARIO 3: FAKE POLICE & DIGITAL ARREST",
+        title: "WhatsApp Video Call: CBI / Narcotics Police Threat",
+        situation: "Someone in a police uniform calls you on WhatsApp video saying: 'Your Aadhaar is linked to illegal narcotics. You are under Digital Arrest. Transfer ₹50,000 to this RBI clearance escrow UPI ID right now or face instant raid.' What is the truth?",
+        options: [
+          { letter: "A", text: "Pay the ₹50,000 immediately to avoid going to jail.", isCorrect: false },
+          { letter: "B", text: "Stay quietly in your room and follow their video orders without telling parents.", isCorrect: false },
+          { letter: "C", text: "Indian Law has NO 'Digital Arrest'. Disconnect immediately, tell family, and dial 1930!", isCorrect: true },
+          { letter: "D", text: "Delete your WhatsApp account and hide your smartphone.", isCorrect: false }
+        ],
+        explanation: "There is NO concept of 'Digital Arrest' in the Indian legal system, CrPC, or Bharatiya Nagarik Suraksha Sanhita. Law enforcement agencies never arrest people via video call or demand UPI payments into bank accounts.",
+        goldenRule: "Golden Rule: Real police never conduct trials on video calls or demand UPI money!"
+      },
+      {
+        id: 4,
+        category: "SCENARIO 4: COLLECT-REQUEST TRAP",
+        title: "Unexpected 'Collect Request' Notification",
+        situation: "You open your UPI app and see an incoming request: 'Collect Request: Pay ₹4,999 to claim your Diwali Bonus Prize'. What happens if you tap 'Pay' and enter your UPI PIN?",
+        options: [
+          { letter: "A", text: "Your bank account will receive a ₹5,000 festival bonus reward.", isCorrect: false },
+          { letter: "B", text: "₹4,999 will be instantly debited from YOUR account and transferred to the scammer.", isCorrect: true },
+          { letter: "C", text: "The app will display an error message and cancel automatically.", isCorrect: false },
+          { letter: "D", text: "You get a digital scratch card with double cashback.", isCorrect: false }
+        ],
+        explanation: "A 'Collect Request' is an authorization for someone else to pull money from your bank account. Entering your UPI PIN is your digital signature giving permission for an immediate outbound debit.",
+        goldenRule: "Golden Rule: Always DECLINE unexpected collect requests. PIN entry = Money leaves your account!"
+      },
+      {
+        id: 5,
+        category: "SCENARIO 5: EMERGENCY GOLDEN HOUR",
+        title: "Emergency Response: Fraud Occurred!",
+        situation: "A family member was unfortunately tricked into entering their UPI PIN and ₹10,000 got debited just 15 minutes ago. What is the single most vital immediate step?",
+        options: [
+          { letter: "A", text: "Wait 2-3 days to see if the money returns to the bank automatically.", isCorrect: false },
+          { letter: "B", text: "Immediately dial National Cyber Crime Helpline 1930 within the 'Golden Hour' to freeze funds.", isCorrect: true },
+          { letter: "C", text: "Call the scammer back and plead with them to refund the amount.", isCorrect: false },
+          { letter: "D", text: "Discard the phone SIM card to prevent further hacking.", isCorrect: false }
+        ],
+        explanation: "Reporting financial cyber fraud on Helpline 1930 within 2 to 3 hours ('The Golden Hour') triggers the Citizen Financial Cyber Fraud Reporting System to freeze fraudulent beneficiary accounts before cash withdrawal.",
+        goldenRule: "Golden Rule: Act in the Golden Hour! Dial 1930 immediately to freeze stolen funds."
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+    let quizUserAnswers = [];
+    let certUserName = "Cyber Defender";
+
+    function initQuizView() {
+      currentQuizIndex = 0;
+      quizScore = 0;
+      quizUserAnswers = [];
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      const q = QUIZ_QUESTIONS[currentQuizIndex];
+      const questionView = document.getElementById('quiz-question-view');
+      const resultView = document.getElementById('quiz-result-view');
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      const stepText = document.getElementById('quiz-step-text');
+      const scoreText = document.getElementById('quiz-score-text');
+      const progressBar = document.getElementById('quiz-progress-bar');
+
+      if (!q) {
+        showQuizResults();
+        return;
+      }
+
+      if (questionView) questionView.style.display = 'flex';
+      if (resultView) resultView.style.display = 'none';
+      if (feedbackBox) feedbackBox.style.display = 'none';
+
+      if (stepText) stepText.innerText = `${currentQuizIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+      if (scoreText) scoreText.innerText = `${quizScore}`;
+      if (progressBar) {
+        const percent = ((currentQuizIndex) / QUIZ_QUESTIONS.length) * 100;
+        progressBar.style.width = `${percent}%`;
+      }
+
+      const catTag = document.getElementById('scenario-category-tag');
+      const titleEl = document.getElementById('scenario-title-text');
+      const sitEl = document.getElementById('scenario-situation-text');
+      const optContainer = document.getElementById('quiz-options-container');
+
+      if (catTag) catTag.innerText = q.category;
+      if (titleEl) titleEl.innerText = q.title;
+      if (sitEl) sitEl.innerText = `"${q.situation}"`;
+
+      if (optContainer) {
+        optContainer.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'quiz-opt-btn';
+          btn.id = `quiz-opt-${idx}`;
+          btn.innerHTML = `
+            <span class="quiz-opt-letter">${opt.letter}</span>
+            <span>${opt.text}</span>
+          `;
+          btn.onclick = () => selectQuizOption(idx);
+          optContainer.appendChild(btn);
+        });
+      }
+    }
+
+    function selectQuizOption(selectedIndex) {
+      const q = QUIZ_QUESTIONS[currentQuizIndex];
+      const optContainer = document.getElementById('quiz-options-container');
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      const verdictTitle = document.getElementById('feedback-verdict-title');
+      const explanationText = document.getElementById('feedback-explanation-text');
+      const ruleText = document.getElementById('feedback-rule-text');
+      const nextBtn = document.getElementById('btn-quiz-next');
+      const scoreText = document.getElementById('quiz-score-text');
+      const progressBar = document.getElementById('quiz-progress-bar');
+
+      if (!optContainer) return;
+
+      const buttons = optContainer.querySelectorAll('button');
+      buttons.forEach(b => b.disabled = true);
+
+      const chosenOpt = q.options[selectedIndex];
+      const isCorrect = chosenOpt.isCorrect;
+
+      quizUserAnswers.push({
+        questionId: q.id,
+        selectedIndex,
+        isCorrect
+      });
+
+      if (isCorrect) {
+        quizScore++;
+        if (scoreText) scoreText.innerText = `${quizScore}`;
+      }
+
+      // Highlight selected and correct buttons
+      buttons.forEach((b, idx) => {
+        if (q.options[idx].isCorrect) {
+          b.classList.add('correct');
+        } else if (idx === selectedIndex && !isCorrect) {
+          b.classList.add('incorrect');
+        }
+      });
+
+      // Update feedback box
+      if (feedbackBox && verdictTitle && explanationText && ruleText) {
+        feedbackBox.style.display = 'flex';
+        feedbackBox.className = `quiz-feedback-box ${isCorrect ? 'correct' : 'incorrect'}`;
+
+        verdictTitle.innerHTML = isCorrect
+          ? `<span>✅</span> <span>CORRECT! Outstanding Cyber Awareness!</span>`
+          : `<span>❌</span> <span>INCORRECT: Watch Out! That is a Scammer's Trap!</span>`;
+
+        explanationText.innerText = q.explanation;
+        ruleText.innerText = q.goldenRule;
+
+        if (progressBar) {
+          const percent = ((currentQuizIndex + 1) / QUIZ_QUESTIONS.length) * 100;
+          progressBar.style.width = `${percent}%`;
+        }
+
+        if (nextBtn) {
+          if (currentQuizIndex + 1 >= QUIZ_QUESTIONS.length) {
+            nextBtn.innerHTML = `<span>Claim Cyber Warrior Certificate</span> <span>🏆</span>`;
+          } else {
+            nextBtn.innerHTML = `<span>Next Challenge (${currentQuizIndex + 2}/${QUIZ_QUESTIONS.length})</span> <span>➡️</span>`;
+          }
+        }
+
+        feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function nextQuizQuestion() {
+      currentQuizIndex++;
+      if (currentQuizIndex < QUIZ_QUESTIONS.length) {
+        renderQuizQuestion();
+      } else {
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      const questionView = document.getElementById('quiz-question-view');
+      const resultView = document.getElementById('quiz-result-view');
+      const progressBar = document.getElementById('quiz-progress-bar');
+      const stepText = document.getElementById('quiz-step-text');
+      const scoreText = document.getElementById('quiz-score-text');
+
+      if (questionView) questionView.style.display = 'none';
+      if (resultView) resultView.style.display = 'flex';
+      if (progressBar) progressBar.style.width = '100%';
+      if (stepText) stepText.innerText = 'Completed!';
+      if (scoreText) scoreText.innerText = `${quizScore} / 5`;
+
+      const scoreDisplay = document.getElementById('result-score-display');
+      const percentDisplay = document.getElementById('result-percent-display');
+      const scoreCircle = document.getElementById('result-score-circle');
+      const headline = document.getElementById('result-verdict-headline');
+      const desc = document.getElementById('result-verdict-desc');
+      const certScore = document.getElementById('cert-display-score');
+      const certDate = document.getElementById('cert-display-date');
+      const certId = document.getElementById('cert-display-id');
+
+      const percent = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+      if (scoreDisplay) scoreDisplay.innerText = `${quizScore}/${QUIZ_QUESTIONS.length}`;
+      if (percentDisplay) percentDisplay.innerText = `${percent}%`;
+
+      if (scoreCircle) {
+        const deg = (percent / 100) * 360;
+        scoreCircle.style.setProperty('--score-angle', `${deg}deg`);
+      }
+
+      if (headline && desc) {
+        if (quizScore === 5) {
+          headline.innerText = '🛡️ Flawless! Certified Cyber Warrior Master';
+          desc.innerText = 'Outstanding! You achieved a perfect 100% score. You possess the complete knowledge required to protect yourself and your family against modern UPI fraud syndicates.';
+        } else if (quizScore >= 3) {
+          headline.innerText = '⚔️ Certified Cyber Defender';
+          desc.innerText = `Great job! You scored ${quizScore}/5 (${percent}%). You showed strong alertness against digital scams. Keep your guard up and review any missed questions!`;
+        } else {
+          headline.innerText = '⚠️ Cyber Novice: High Scam Vulnerability';
+          desc.innerText = `You scored ${quizScore}/5 (${percent}%). Cyber fraudsters could exploit these loopholes. Review the 6 Official Safety Rules below and retake the quiz to earn your Warrior badge!`;
+        }
+      }
+
+      // Update certificate details
+      if (certScore) certScore.innerText = `${quizScore} out of ${QUIZ_QUESTIONS.length} (${percent}%)`;
+      
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      if (certDate) certDate.innerText = dateStr;
+
+      // Unique certificate verification ID
+      const randomCode = Math.floor(1000 + Math.random() * 9000);
+      if (certId) certId.innerText = `CW-UPI-${today.getFullYear()}-${randomCode}`;
+
+      updateCertificateName();
+      resultView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateCertificateName() {
+      const inputEl = document.getElementById('cert-user-name');
+      const displayEl = document.getElementById('cert-display-name');
+      let name = inputEl?.value.trim() || 'Cyber Defender';
+      certUserName = name;
+      if (displayEl) displayEl.innerText = name;
+    }
+
+    function retakeQuiz() {
+      initQuizView();
+      const quizSection = document.getElementById('quiz-section');
+      if (quizSection) quizSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function printCertificate() {
+      window.print();
+    }
+
+    // High resolution Canvas certificate generator & PNG downloader
+    function downloadCertificateImage() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 800;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Background Parchment Gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+      bgGrad.addColorStop(0, '#f8fafc');
+      bgGrad.addColorStop(0.5, '#ffffff');
+      bgGrad.addColorStop(1, '#f1f5f9');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Outer Deep Navy Border
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 16;
+      ctx.strokeRect(20, 20, w - 40, h - 40);
+
+      // Inner Gold Dashed / Double Accent Border
+      ctx.strokeStyle = '#b45309';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(36, 36, w - 72, h - 72);
+
+      // Thin Inner Gold Guide
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(42, 42, w - 84, h - 84);
+
+      // Corner Accents (Gold Stars)
+      ctx.fillStyle = '#d97706';
+      ctx.font = '28px serif';
+      ctx.fillText('✦', 50, 70);
+      ctx.fillText('✦', w - 75, 70);
+      ctx.fillText('✦', 50, h - 55);
+      ctx.fillText('✦', w - 75, h - 55);
+
+      // National Initiative Sub-header
+      ctx.fillStyle = '#0284c7';
+      ctx.font = 'bold 15px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('NATIONAL CYBER SAFETY & FRAUD PREVENTION INITIATIVE', w / 2, 95);
+
+      // Main Title
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '900 36px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('CERTIFICATE OF ACHIEVEMENT', w / 2, 145);
+
+      ctx.fillStyle = '#64748b';
+      ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Cybersecurity Vigilance & UPI Digital Fraud Defense', w / 2, 178);
+
+      // Presentation Line
+      ctx.fillStyle = '#475569';
+      ctx.font = 'italic 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('This official credential certifies that', w / 2, 230);
+
+      // Recipient Name
+      ctx.fillStyle = '#1e3a8a';
+      ctx.font = '900 44px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(certUserName, w / 2, 290);
+
+      // Underline under name
+      const nameWidth = ctx.measureText(certUserName).width;
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - nameWidth / 2 - 20, 305);
+      ctx.lineTo(w / 2 + nameWidth / 2 + 20, 305);
+      ctx.stroke();
+
+      // Body Paragraph
+      ctx.fillStyle = '#334155';
+      ctx.font = '16px "Plus Jakarta Sans", sans-serif';
+      const percent = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+      ctx.fillText(`has successfully demonstrated outstanding proficiency and vigilance in neutralizing`, w / 2, 350);
+      ctx.fillText(`Fake QR Code Scams, Collect-Request Frauds, Screen-Sharing Exploits, and Digital Arrests,`, w / 2, 375);
+      ctx.fillText(`achieving an official verified score of ${quizScore} out of 5 (${percent}%).`, w / 2, 400);
+
+      // Draw Center Gold Cyber Warrior Shield Badge
+      const sealX = w / 2;
+      const sealY = 510;
+      const sealR = 56;
+
+      const sealGrad = ctx.createRadialGradient(sealX, sealY, 10, sealX, sealY, sealR);
+      sealGrad.addColorStop(0, '#fef08a');
+      sealGrad.addColorStop(1, '#d97706');
+      ctx.fillStyle = sealGrad;
+      ctx.beginPath();
+      ctx.arc(sealX, sealY, sealR, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = '#b45309';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      // Shield inside badge
+      ctx.font = '32px serif';
+      ctx.fillText('🛡️', sealX, sealY + 2);
+
+      ctx.fillStyle = '#78350f';
+      ctx.font = '900 10px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('CYBER WARRIOR', sealX, sealY + 28);
+
+      // Left Column: Issue Date
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = 'bold 12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('DATE OF ISSUE', 140, 580);
+
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(dateStr, 140, 605);
+
+      ctx.fillStyle = '#64748b';
+      ctx.font = '12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('National Cyber Safety Drive', 140, 625);
+
+      // Right Column: Certificate ID & 1930 Helpline
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = 'bold 12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('CERTIFICATE IDENTIFIER', w - 140, 580);
+
+      const idText = document.getElementById('cert-display-id')?.innerText || `CW-UPI-${today.getFullYear()}-8941`;
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(idText, w - 140, 605);
+
+      ctx.fillStyle = '#059669';
+      ctx.font = 'bold 12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('✔ Verified Helpline 1930 Compliant', w - 140, 625);
+
+      // Bottom Bar
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('SurakshaUPI • Citizen Financial Cyber Fraud Defense Portal • National Cyber Crime Helpline: 1930', w / 2, 725);
+
+      // Export as PNG and trigger download
+      const dataUrl = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = `Cyber_Warrior_Certificate_${certUserName.replace(/\s+/g, '_')}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function showTurtleForScam(cat) {
+      switchView('turtle');
+      let type = 'qr';
+      if (cat === 'DIGITAL_ARREST') type = 'arrest';
+      else if (cat === 'SCREEN_SHARING') type = 'screen';
+      runTurtleDemo(type);
+    }
+
+    // =========================================================================
+    // HTML5 Python Turtle Graphics Engine Simulator
+    // Translates turtle commands (goto, forward, color, circle) onto canvas!
+    // =========================================================================
+    function runTurtleDemo(type) {
+      const canvas = document.getElementById('turtle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Clear canvas
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, w, h);
+
+      // Data configuration based on scam
+      let data = {
+        title: "Fake QR Code Reverse Scam",
+        score: 80,
+        level: "CRITICAL THREAT",
+        rule: "QR Codes are ONLY for SENDING money. NEVER scan to receive!",
+        color: "#ef4444"
+      };
+
+      if (type === 'arrest') {
+        data = {
+          title: "Digital Arrest Extortion Scam",
+          score: 100,
+          level: "CRITICAL CRIME SYNDICATE",
+          rule: "Indian Law has NO Digital Arrest! Police never demand UPI money!",
+          color: "#dc2626"
+        };
+      } else if (type === 'screen') {
+        data = {
+          title: "AnyDesk Screen-Sharing Scam",
+          score: 95,
+          level: "HIGH RISK TAKEOVER",
+          rule: "NEVER install remote desktop apps (AnyDesk/TeamViewer) on call!",
+          color: "#ea580c"
+        };
+      } else if (type === 'safe') {
+        data = {
+          title: "Standard Verified UPI Transaction",
+          score: 10,
+          level: "SAFE TRANSACTION",
+          rule: "Always verify recipient name on UPI screen before paying.",
+          color: "#10b981"
+        };
+      }
+
+      // Draw Top Header Card (Turtle Rounded Rectangle)
+      ctx.fillStyle = '#1e293b';
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, 20, 16, w - 40, 56, 10, true, true);
+
+      // Draw Shield Emblem
+      drawTurtleShield(ctx, 48, 44, 16, data.color);
+
+      // Header Text
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = 'bold 15px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('SurakshaUPI: Turtle Cyber Shield', 75, 38);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Visual Security Shield & Scam Threat Analysis', 75, 55);
+
+      // 1930 Helpline Badge on top right
+      ctx.fillStyle = '#dc2626';
+      roundRect(ctx, w - 150, 24, 130, 36, 8, true, false);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('🚨 Helpline: 1930', w - 138, 46);
+
+      // Main Report Card
+      ctx.fillStyle = '#111827';
+      ctx.strokeStyle = data.color;
+      ctx.lineWidth = 2;
+      roundRect(ctx, 20, 86, w - 40, 350, 14, true, true);
+
+      // Threat Assessment Title
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = 'bold 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`THREAT ASSESSMENT: ${data.level} (${data.score}%)`, 40, 120);
+
+      // Draw Threat Meter Bar Background
+      ctx.fillStyle = '#1f2937';
+      roundRect(ctx, 40, 134, w - 80, 20, 8, true, false);
+
+      // Animated Threat Meter Bar Fill
+      const targetWidth = Math.max(16, (w - 80) * (data.score / 100));
+      ctx.fillStyle = data.color;
+      roundRect(ctx, 40, 134, targetWidth, 20, 8, true, false);
+
+      // Detection Output
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`Scam Detected: ${data.title}`, 40, 185);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Investigation Verdict & Safe Protocol:', 40, 210);
+
+      // Summary lines
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '13px "Plus Jakarta Sans", sans-serif';
+      if (type === 'qr') {
+        ctx.fillText('• QR codes are technically designed ONLY for transferring money OUT of an account.', 40, 235);
+        ctx.fillText('• You never need to scan a QR code or enter your secret PIN to receive payments.', 40, 255);
+        ctx.fillText('• Entering your 4 or 6-digit PIN will immediately drain your bank account.', 40, 275);
+      } else if (type === 'arrest') {
+        ctx.fillText('• There is NO provision for "Digital Arrest" in the Indian Penal Code or CrPC.', 40, 235);
+        ctx.fillText('• Real police and central agencies never conduct interrogations via WhatsApp video.', 40, 255);
+        ctx.fillText('• Government officials NEVER demand money transfers or UPI deposits.', 40, 275);
+      } else if (type === 'screen') {
+        ctx.fillText('• AnyDesk/TeamViewer gives fraudsters real-time live view of your smartphone.', 40, 235);
+        ctx.fillText('• They can see incoming OTPs and bank credentials as you type them.', 40, 255);
+        ctx.fillText('• Immediately uninstall the app and turn off your mobile data.', 40, 275);
+      } else {
+        ctx.fillText('• Recipient UPI ID verified through official registered banking channel.', 40, 235);
+        ctx.fillText('• Check beneficiary name displayed on screen matches merchant.', 40, 255);
+        ctx.fillText('• Safe to proceed with normal authorized debit.', 40, 275);
+      }
+
+      // Golden Rule Banner
+      ctx.fillStyle = '#1e1b4b';
+      ctx.strokeStyle = '#4338ca';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, 40, 310, w - 80, 68, 10, true, true);
+
+      ctx.fillStyle = '#facc15';
+      ctx.font = 'bold 10px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('GOLDEN CYBER SAFETY RULE:', 55, 330);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`"${data.rule}"`, 55, 354);
+
+      // Emergency Footer Line
+      ctx.fillStyle = '#f87171';
+      ctx.font = 'bold 12px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('National Cyber Crime Helpline: Dial 1930 | Portal: cybercrime.gov.in', 40, 412);
+
+      // Draw turtle mascot at bottom right
+      ctx.font = '24px serif';
+      ctx.fillText('🐢', w - 75, 415);
+    }
+
+    function clearTurtleCanvas() {
+      const canvas = document.getElementById('turtle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#64748b';
+      ctx.font = '14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Turtle Canvas Cleared. Click any scenario button above to draw!', 110, 230);
+    }
+
+    // Helper: Draw rounded rectangle
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    // Helper: Draw Shield on canvas
+    function drawTurtleShield(ctx, x, y, size, color) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x, y - size);
+      ctx.lineTo(x + size, y - size * 0.4);
+      ctx.lineTo(x + size * 0.8, y + size * 0.6);
+      ctx.lineTo(x, y + size * 1.2);
+      ctx.lineTo(x - size * 0.8, y + size * 0.6);
+      ctx.lineTo(x - size, y - size * 0.4);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      // Checkmark inside shield
+      ctx.beginPath();
+      ctx.moveTo(x - size * 0.35, y + size * 0.1);
+      ctx.lineTo(x - size * 0.05, y + size * 0.45);
+      ctx.lineTo(x + size * 0.45, y - size * 0.25);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Modal Handlers
+    function openSafetyRulesModal() {
+      const el = document.getElementById('safety-rules-modal');
+      if (el) el.style.display = 'flex';
+    }
+
+    function closeSafetyRulesModal() {
+      const el = document.getElementById('safety-rules-modal');
+      if (el) el.style.display = 'none';
+    }
+
+    function openReportModal() {
+      const el = document.getElementById('report-fraud-modal');
+      if (el) el.style.display = 'flex';
+    }
+
+    function closeReportModal() {
+      const el = document.getElementById('report-fraud-modal');
+      if (el) el.style.display = 'none';
+    }
+
+    function openPythonModal() {
+      const el = document.getElementById('python-modal');
+      if (el) el.style.display = 'flex';
+    }
+
+    function closePythonModal() {
+      const el = document.getElementById('python-modal');
+      if (el) el.style.display = 'none';
+    }
+
+    function copyComplaintText() {
+      const text = document.getElementById('complaint-template')?.innerText;
+      if (text && navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert("Complaint draft copied to clipboard! You can paste it into an email to your bank or police.");
+        }).catch(() => {
+          alert("Please select and copy the text inside the box.");
+        });
+      }
+    }
+
+    // Expose all handlers globally
+    window.startAnalysis = startAnalysis;
+    window.selectScenario = selectScenario;
+    window.resetChat = resetChat;
+    window.readAloud = readAloud;
+    window.switchView = switchView;
+    window.showTurtleForScam = showTurtleForScam;
+    window.runTurtleDemo = runTurtleDemo;
+    window.clearTurtleCanvas = clearTurtleCanvas;
+    window.openSafetyRulesModal = openSafetyRulesModal;
+    window.closeSafetyRulesModal = closeSafetyRulesModal;
+    window.openReportModal = openReportModal;
+    window.closeReportModal = closeReportModal;
+    window.openPythonModal = openPythonModal;
+    window.closePythonModal = closePythonModal;
+    window.copyComplaintText = copyComplaintText;
+    window.initQuizView = initQuizView;
+    window.selectQuizOption = selectQuizOption;
+    window.nextQuizQuestion = nextQuizQuestion;
+    window.updateCertificateName = updateCertificateName;
+    window.retakeQuiz = retakeQuiz;
+    window.printCertificate = printCertificate;
+    window.downloadCertificateImage = downloadCertificateImage;
+  </script>
+
+</body>
+</html>
